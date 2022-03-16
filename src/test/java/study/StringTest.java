@@ -26,4 +26,13 @@ StringTest {
         assertThat(exArray).containsExactly("1", "2");
         assertThat(exArray2).containsExactly("1");
     }
+
+    @Test
+    void substring() {
+        String input = "(1,2)";
+        input = input.substring(1);
+        input = input.substring(0, input.length()-1);
+        System.out.println(input);
+        assertThat(input).isEqualTo("1,2");
+    }
 }
