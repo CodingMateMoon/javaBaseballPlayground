@@ -1,8 +1,12 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
+
 
 public class
 StringTest {
@@ -34,5 +38,25 @@ StringTest {
         input = input.substring(0, input.length()-1);
         System.out.println(input);
         assertThat(input).isEqualTo("1,2");
+    }
+
+    @Test
+    void charAt() {
+        String input = "abc";
+        int index = 1;
+
+        assertThat(input.charAt(index)).isEqualTo('b');
+    }
+
+    @Test
+    @DisplayName("ChatAt 테스트에서 assertThatThrownBy를 활용하여 Exception 처리")
+    void charAtException() {
+        String input = "abc";
+        int index = 22;
+
+        assertThatThrownBy(()->{
+
+            assertThat(input.charAt(index)).isEqualTo('b');
+        }).isInstanceOf(StringIndexOutOfBoundsException.class).hasMessageContaining("%d",index);
     }
 }
