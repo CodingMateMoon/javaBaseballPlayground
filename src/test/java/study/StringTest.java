@@ -3,13 +3,18 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.*;
 
 
-public class
-StringTest {
+public class StringTest {
+
+    // assertions 문서 참고 : https://joel-costigliola.github.io/assertj/assertj-core-features-highlight.html#exception-assertion
+    @Test
+    public void testException() {
+        assertThatThrownBy(() -> { throw new Exception("boom!"); }).isInstanceOf(Exception.class)
+                .hasMessageContaining("boom");
+    }
+
     @Test
     void replace() {
         String actual = "abc".replace("b", "d");
@@ -48,15 +53,34 @@ StringTest {
         assertThat(input.charAt(index)).isEqualTo('b');
     }
 
+    /*
+    java.lang.AssertionError:
+    Expecting code to raise a throwable.
+    * */
     @Test
     @DisplayName("ChatAt 테스트에서 assertThatThrownBy를 활용하여 Exception 처리")
     void charAtException() {
         String input = "abc";
-        int index = 22;
+        int index = 1;
 
         assertThatThrownBy(()->{
 
             assertThat(input.charAt(index)).isEqualTo('b');
-        }).isInstanceOf(StringIndexOutOfBoundsException.class).hasMessageContaining("%d",index);
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("%d",index);
     }
+
+    @Test
+    @DisplayName("charAt에서 assertThatExceptionOfType 사용하여 Exception 처리")
+    void charAtException2() {
+
+        String str = "abc";
+        int index = 21;
+
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    char c = str.charAt(index);
+                    assertThat(c).isEqualTo('c');
+                }).withMessageContaining("%d", index);
+    }
+
 }
