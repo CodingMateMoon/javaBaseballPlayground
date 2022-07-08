@@ -150,6 +150,13 @@ public class StringTest {
     }
 
     /*
+    int index = 1;
+
+    assertThatThrownBy(() -> {
+
+        assertThat(input.charAt(index)).isEqualTo('b');
+    }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("%d", index);
+    IndexOutOfBoundsException이 발생하지 않으면 isInstanceOf(IndexOutOfBoundsException.class)에서 조건을 충족시키지 못하므로 AssertionError가 발생합니다.
     java.lang.AssertionError:
     Expecting code to raise a throwable.
     * */
@@ -157,7 +164,7 @@ public class StringTest {
     @DisplayName("ChatAt 테스트에서 assertThatThrownBy를 활용하여 Exception 처리")
     void charAtException() {
         String input = "abc";
-        int index = 1;
+        int index = 5;
 
         assertThatThrownBy(() -> {
 
@@ -166,7 +173,7 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("charAt에서 assertThatExceptionOfType 사용하여 Exception 처리")
+    @DisplayName("charAt에서 assertThatExceptionOfType을 사용하여 Exception 처리")
     void charAtException2() {
 
         String str = "abc";
