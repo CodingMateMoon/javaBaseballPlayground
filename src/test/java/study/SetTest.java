@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -44,6 +45,14 @@ public class SetTest {
         assertThat(numbers.contains(2)).isTrue();
         assertThat(numbers.contains(3)).isTrue();
     }
+
+    @NullAndEmptySource, @ValueSource를 함께 사용하여 null, empty 등 빈문자열과 여러 값의 문자열들을 모두 포함하는 테스트를 할 수 있습니다.
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"  ", "\t", "\n"})
+    void isBlank_ShouldReturnTrueForAllTypesOfBlankStrings(String input) {
+        assertTrue(Strings.isBlank(input));
+    }
      */
 
     @ParameterizedTest
@@ -58,6 +67,29 @@ public class SetTest {
     예를 들어 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
     Guide to JUnit 5 Parameterized Tests 문서에서 @CsvSource를 활용한다.
     https://www.baeldung.com/parameterized-tests-junit-5
+    toUpperCase() 함수는 기대값으로 대문자 값이 필요합니다. parameterized 테스트 시나리오를 생각할 때 입력값에 대한 기대값 JaVa가 입력되면 JAVA가 기대값인 것과 같이 함수에 전달할 두개의 인자값(입력값, 기대값)이 필요합니다. 그래서 여러 인자값을 전달할 @CSVSource를 사용합니다.
+    기본적으로 ','를 구분자로 쓸 수 있지만 delimiter = ':' 와 같이 delimiter 속성을 사용하여 원하는 방식으로 변형할 수 있습니다.
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1) 로 파일 또한 읽어들일 수 있습니다.
+
+    @ParameterizedTest
+    @CsvSource({"test,TEST", "tEst,TEST", "Java,JAVA"})
+    void toUpperCase_ShouldGenerateTheExpectedUppercaseValue(String input, String expected) {
+        String actualValue = input.toUpperCase();
+        assertEquals(expected, actualValue);
+    }
+    @ParameterizedTest
+    @CsvSource(value = {"test:test", "tEst:test", "Java:java"}, delimiter = ':')
+    void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String expected) {
+        String actualValue = input.toLowerCase();
+        assertEquals(expected, actualValue);
+    }
      */
+
+    @ParameterizedTest
+    @CsvSource(value ={"1:true", "2:true", "3:true", "4:false", "5:false","6:true"}, delimiter = ':')
+    void containsCsv(int input, boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
+    }
+
 
 }
