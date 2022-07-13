@@ -40,4 +40,9 @@ class BaseballTest {
     void checkContainSameChar() {
         assertThat(baseball.checkContainSameChar(input, '1', 1)).isEqualTo(1);
     }
+
+    @Test
+    void playGame() {
+        assertThat(baseball.playGame(answer, input)).isEqualTo("1볼 1스트라이크");
+    }
 }

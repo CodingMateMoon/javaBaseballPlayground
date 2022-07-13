@@ -39,4 +39,10 @@ public class Baseball {
         return count;
     }
 
+    String playGame(String answer, String input) {
+        int strikeCount = 0;
+        int ballCount = 0;
+
+    }
+
 }
