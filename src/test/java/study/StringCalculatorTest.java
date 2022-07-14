@@ -4,10 +4,9 @@ package study;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import practice.StringCalculator;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StringCalculatorTest {
+public class StringCalculatorTest {
 
     private StringCalculator stringCalculator;
 

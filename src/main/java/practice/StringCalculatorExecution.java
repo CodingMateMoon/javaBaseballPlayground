@@ -1,6 +1,5 @@
-package study;
+package practice;
 
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class StringCalculatorExecution {

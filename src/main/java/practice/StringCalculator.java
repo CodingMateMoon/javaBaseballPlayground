@@ -1,4 +1,4 @@
-package study;
+package practice;
 
 /*
 • 다음 요구사항을 JUnit을 활용해 단위 테스트 코드를 추가해 구현한다.
@@ -15,18 +15,18 @@ package study;
  */
 public class StringCalculator {
 
-    int plus(int a, int b) {
+    public int plus(int a, int b) {
        return a+b;
     }
 
-    int minus(int a, int b) {
+    public int minus(int a, int b) {
         return a-b;
     }
-    int multiple(int a, int b) {
+    public int multiple(int a, int b) {
         return a * b;
     }
 
-    int divide(int a, int b) {
+    public int divide(int a, int b) {
         if(b == 0)
             return 0;
         return a / b;
